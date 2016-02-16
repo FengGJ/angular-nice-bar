@@ -49,3 +49,7 @@ angular.module('app', ['ngNiceBar'])
   }, 10);
 });
 ```
+
+### License
+
+  [MIT](LICENSE)
