@@ -24,7 +24,7 @@ function niceBarDirective() {
         setTimeout(function() {
           nb.init(element[0]);
         }, delay)
-      }, 30)
+      }, 1000)
 
     }
   }
@@ -35,7 +35,6 @@ function niceBarDirective() {
 function niceBarService() {
   return {
     init: function (element) {
-      console.log(123456);
       nb.init(element);
     }
   }

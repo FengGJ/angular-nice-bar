@@ -209,28 +209,16 @@ var mouseWheel = require('./event/mouse-wheel');
 var pressKeyboard = require('./event/press-keyboard');
 var hoverContainer = require('./event/hover-container');
 
-module.exports = function(element) {
-  var $content = createContentElement();
+module.exports = function (element) {
+  var i = Object.create(instance);
+  i.init(element);
 
-  if ($content.scrollHeight > element.clientHeight) {
-    var i = Object.create(instance);
-    i.init(element);
-
+  if (i.content.element.scrollHeight > element.clientHeight) {
     clickRail(i);
     dragSlider(i);
     mouseWheel(i);
     pressKeyboard(i);
     hoverContainer(i);
-  }
-
-  // //////////////////
-  function createContentElement() {
-    var inner = element.innerHTML;
-    element.innerHTML = '<div id="niceBarContent"></div>';
-
-    var $content = document.getElementById('niceBarContent');
-    $content.innerHTML = inner;
-    return $content;
   }
 
 };
@@ -239,11 +227,12 @@ module.exports = function(element) {
 'use strict';
 
 var dom = require('./util/dom');
+var guid = require('./util/guid');
 
 var instance = {
-  init: function(element) {
+  init: function (element) {
 
-    var $content = document.getElementById('niceBarContent');
+    var $content = createContentElement(element);
     var $railY = createRailYElement();
     var $sliderY = createSliderYElement();
 
@@ -255,7 +244,7 @@ var instance = {
     this.container = {
       element: element,
       width: element.clientWidth,
-      height: element.clientHeight
+      height: element.clientHeight,
     };
 
     this.ing = true;
@@ -265,7 +254,7 @@ var instance = {
       element: $content,
       width: $content.clientWidth,
       height: $content.scrollHeight,
-      scrollTop: $content.scrollTop
+      scrollTop: $content.scrollTop,
     };
 
     this.ratioX = this.container.width / this.content.width;
@@ -276,7 +265,7 @@ var instance = {
     this.railY = {
       element: $railY,
       width: 400,
-      height: this.container.height
+      height: this.container.height,
     };
 
     this.sliderX = { width: 400, height: '' };
@@ -286,31 +275,31 @@ var instance = {
       element: $sliderY,
       top: 0,
       width: 40,
-      height: this.container.height * this.ratioY
+      height: this.container.height * this.ratioY,
     };
 
     dom.css(this.sliderY.element, 'height', this.sliderY.height + 'px');
 
     dom.css(this.container.element, {
       overflow: 'hidden',
-      position: 'relative'
+      position: 'relative',
     });
 
     dom.css(this.content.element, {
       overflow: 'hidden',
-      height: this.container.height
+      height: this.container.height,
     });
   },
 
-  showSliderY: function() {
+  showSliderY: function () {
     dom.addClass(this.sliderY.element, 'fade-in');
     dom.removeClass(this.sliderY.element, 'fade-out');
   },
 
-  hideSliderY: function() {
+  hideSliderY: function () {
     dom.addClass(this.sliderY.element, 'fade-out');
     dom.removeClass(this.sliderY.element, 'fade-in');
-  }
+  },
 
 };
 
@@ -323,14 +312,24 @@ function createRailYElement() {
   return dom.createElement('<div class="nice-bar-rail-y"></div>');
 }
 
+function createContentElement(element) {
+  var inner = element.innerHTML;
+  var id = guid();
+  element.innerHTML = '<div id="' + id + '"></div>';
+
+  var $content = document.getElementById(id);
+  $content.innerHTML = inner;
+  return $content;
+}
+
 module.exports = instance;
 
-},{"./util/dom":10}],9:[function(require,module,exports){
+},{"./util/dom":10,"./util/guid":12}],9:[function(require,module,exports){
 'use strict';
 
 var init = require('./init');
 
-module.exports = { init: init };
+module.exports = {init: init};
 
 },{"./init":7}],10:[function(require,module,exports){
 'use strict';
@@ -442,6 +441,18 @@ module.exports = event;
 },{}],12:[function(require,module,exports){
 'use strict';
 
+module.exports = function () {
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+};
+
+function s4() {
+  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+}
+
+},{}],13:[function(require,module,exports){
+'use strict';
+
 var nb = require('nice-bar');
 
 module.exports = angular.module('ngNiceBar', []).directive('niceBar', niceBarDirective).factory('niceBar', niceBarService);
@@ -464,7 +475,7 @@ function niceBarDirective() {
         setTimeout(function () {
           nb.init(element[0]);
         }, delay);
-      }, 30);
+      }, 1000);
     }
   };
 }
@@ -473,10 +484,9 @@ function niceBarDirective() {
 function niceBarService() {
   return {
     init: function init(element) {
-      console.log(123456);
       nb.init(element);
     }
   };
 }
 
-},{"nice-bar":1}]},{},[12]);
+},{"nice-bar":1}]},{},[13]);
