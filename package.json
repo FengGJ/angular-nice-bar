@@ -1,8 +1,8 @@
 {
   "name": "angular-nice-bar",
   "version": "1.0.0",
-  "description": "A nice for Angular",
-  "main": "angular-nice-bar.js",
+  "description": "A nice and lightweight scrollbar in Angular",
+  "main": "dist/js/angular-nice-bar.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,9 +11,9 @@
     "url": "git+https://github.com/forsigner/angular-nice-bar.git"
   },
   "keywords": [
-    "angular",
-    "active",
-    "link"
+    "nice-bar",
+    "scrollbar",
+    "angular"
   ],
   "author": "forsigner",
   "license": "MIT",
