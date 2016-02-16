@@ -1,4 +1,6 @@
-var nb = require('nice-bar')
+'use strict';
+
+var nb = require('nice-bar');
 
 module.exports = angular
   .module('ngNiceBar', [])
@@ -21,21 +23,18 @@ function niceBarDirective() {
       }
 
       setTimeout(function() {
-        setTimeout(function() {
-          nb.init(element[0]);
-        }, delay)
-      }, 1000)
-
+        nb.init(element[0]);
+      }, delay);
     }
-  }
+  };
 }
 
 
 // @ngInject
 function niceBarService() {
   return {
-    init: function (element) {
+    init: function(element) {
       nb.init(element);
     }
-  }
+  };
 }

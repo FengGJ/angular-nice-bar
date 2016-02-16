@@ -472,10 +472,8 @@ function niceBarDirective() {
       }
 
       setTimeout(function () {
-        setTimeout(function () {
-          nb.init(element[0]);
-        }, delay);
-      }, 1000);
+        nb.init(element[0]);
+      }, delay);
     }
   };
 }
