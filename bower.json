@@ -1,12 +1,12 @@
 {
   "name": "angular-nice-bar",
-  "version": "1.0.8",
   "homepage": "https://github.com/forsigner/angular-nice-bar",
-  "description": "A nice scrollbar.",
-  "main": "dist/dist/angular-nice-bar.js",
+  "description": "A nice and lightweight scrollbar in Angular",
+  "main": "dist/js/angular-nice-bar.js",
   "keywords": [
-    "popover",
-    "tether"
+    "nice-bar",
+    "scrollbar",
+    "angular"
   ],
   "authors": [
     "forsigner"
@@ -18,8 +18,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {
-    "tether": "*"
-  }
+  ]
 }
