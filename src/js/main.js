@@ -1,14 +1,13 @@
 'use strict';
 
-var nb = require('nice-bar');
+// var nb = require('nice-bar');
+var nb = {init: function(){}};
 
 module.exports = angular
   .module('ngNiceBar', [])
   .directive('niceBar', niceBarDirective)
   .factory('niceBar', niceBarService);
 
-
-// @ngInject
 function niceBarDirective() {
   return {
     restrict: 'AE',
