@@ -1,8 +1,7 @@
-
-# angular-nice-bar
+# Angular-nice-bar
 A nice and lightweight scrollbar in Angular.
 
-[Demo](http://forsigner.com/angular-nice-bar)
+[Demo](http://forsigner.com/nice-bar)
 
 ### Install
 
@@ -20,4 +19,33 @@ bower install angular-nice-bar --save
 
 ```js
 angular.module('app', ['ngNiceBar']);
+```
+
+#### As a directive
+
+```js
+angular.module('app', ['foPopover']);
+```
+
+```html
+<div nice-bar nice-bar-delay="1000">
+  <!-- content here-->
+</div>
+```
+
+#### As a service
+
+``` html
+<div id="container">
+  <!-- content here-->
+</div>
+```
+
+```js
+angular.module('app', ['ngNiceBar'])
+.controller('HomeCtrl', function($scope, niceBar) {
+  $timeout(function() {
+    niceBar.init(document.getElementById('container'));
+  }, 10);
+});
 ```
