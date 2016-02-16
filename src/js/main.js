@@ -1,7 +1,6 @@
 'use strict';
 
-// var nb = require('nice-bar');
-var nb = {init: function(){}};
+var nb = require('nice-bar');
 
 module.exports = angular
   .module('ngNiceBar', [])
