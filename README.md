@@ -1,6 +1,9 @@
 # Angular-nice-bar
 A nice and lightweight scrollbar in Angular.
 
+
+### Demo
+
 [Demo](http://forsigner.com/nice-bar)
 
 ### Install
