@@ -31,7 +31,7 @@ angular.module('app', ['foPopover']);
 ```
 
 ```html
-<div nice-bar nice-bar-delay="1000">
+<div nice-bar nice-bar-delay="1000" nice-bar-theme="dark">
   <!-- content here-->
 </div>
 ```
@@ -51,6 +51,17 @@ angular.module('app', ['ngNiceBar'])
     niceBar.init(document.getElementById('container'));
   }, 10);
 });
+```
+
+#### Custom theme
+
+You can custom scrollbar style with CSS easily:
+
+``` CSS
+.nice-bar .nice-bar-slider-y {
+  background: #222;
+  /* whatever */
+}
 ```
 
 ### License
