@@ -1,6 +1,6 @@
 {
   "name": "angular-nice-bar",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A nice and lightweight scrollbar in Angular",
   "main": "dist/js/angular-nice-bar.js",
   "scripts": {
