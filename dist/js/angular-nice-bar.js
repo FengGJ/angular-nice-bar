@@ -209,9 +209,9 @@ var mouseWheel = require('./event/mouse-wheel');
 var pressKeyboard = require('./event/press-keyboard');
 var hoverContainer = require('./event/hover-container');
 
-module.exports = function (element) {
+module.exports = function (element, options) {
   var i = Object.create(instance);
-  i.init(element);
+  i.init(element, options);
 
   if (i.content.element.scrollHeight > element.clientHeight) {
     clickRail(i);
@@ -230,11 +230,18 @@ var dom = require('./util/dom');
 var guid = require('./util/guid');
 
 var instance = {
-  init: function (element) {
+  init: function (element, options) {
+    if (options) {
+      options = { theme: options.theme || 'light' };
+    } else {
+      options = { theme: 'light' };
+    }
 
     var $content = createContentElement(element);
     var $railY = createRailYElement();
     var $sliderY = createSliderYElement();
+
+    setTheme(element, options);
 
     dom.appendTo($railY, element);
     dom.appendTo($sliderY, element);
@@ -304,6 +311,11 @@ var instance = {
 };
 
 // ////////////////////////////////////////
+function setTheme(element, optopns) {
+  dom.addClass(element, 'theme-' +  optopns.theme);
+  dom.addClass(element, 'nice-bar');
+}
+
 function createSliderYElement() {
   return dom.createElement('<div class="nice-bar-slider-y"></div>');
 }
@@ -462,6 +474,7 @@ function niceBarDirective() {
     restrict: 'AE',
     link: function link(scope, element, attr) {
       var delay = 0;
+      var theme = 'light';
 
       if (attr.niceBarDelay) {
         delay = parseInt(attr.niceBarDelay, 10);
@@ -470,8 +483,12 @@ function niceBarDirective() {
         }
       }
 
+      if (attr.niceBarTheme) {
+        delay = attr.niceBarTheme;
+      }
+
       setTimeout(function () {
-        nb.init(element[0]);
+        nb.init(element[0], { theme: theme });
       }, delay);
     }
   };
@@ -480,8 +497,15 @@ function niceBarDirective() {
 // @ngInject
 function niceBarService() {
   return {
-    init: function init(element) {
-      nb.init(element);
+    init: function init(element, options) {
+      if (options) {
+        options = { theme: options.theme || 'light' };
+      } else {
+        options = { theme: 'light' };
+      }
+      console.log(options);
+      // nb.init(element, {theme: options.theme});
+      nb.init(element, { theme: 'dark' });
     }
   };
 }

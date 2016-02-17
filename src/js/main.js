@@ -12,6 +12,7 @@ function niceBarDirective() {
     restrict: 'AE',
     link: function(scope, element, attr) {
       var delay = 0;
+      var theme = 'light';
 
       if (attr.niceBarDelay) {
         delay = parseInt(attr.niceBarDelay, 10);
@@ -20,8 +21,12 @@ function niceBarDirective() {
         }
       }
 
+      if (attr.niceBarTheme) {
+        delay = attr.niceBarTheme;
+      }
+
       setTimeout(function() {
-        nb.init(element[0]);
+        nb.init(element[0], {theme: theme});
       }, delay);
     }
   };
@@ -31,8 +36,15 @@ function niceBarDirective() {
 // @ngInject
 function niceBarService() {
   return {
-    init: function(element) {
-      nb.init(element);
+    init: function(element, options) {
+      if (options) {
+        options = {theme: options.theme || 'light'};
+      } else {
+        options = {theme: 'light'};
+      }
+      console.log(options);
+      // nb.init(element, {theme: options.theme});
+      nb.init(element, {theme: 'dark'});
     }
   };
 }
