@@ -27,7 +27,7 @@ angular.module('app', ['ngNiceBar']);
 #### As a directive
 
 ```js
-angular.module('app', ['foPopover']);
+angular.module('app', ['ngNiceBar']);
 ```
 
 ```html
